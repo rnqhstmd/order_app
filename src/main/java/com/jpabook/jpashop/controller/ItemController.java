@@ -48,23 +48,6 @@ public class ItemController {
     }
 
     /**
-     * 상품 수정 폼
-     */
-    @GetMapping(value = "/items/{itemId}/edit")
-    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
-        Book item = (Book) itemService.findItems(itemId);
-        BookForm form = new BookForm();
-        form.setId(item.getId());
-        form.setName(item.getName());
-        form.setPrice(item.getPrice());
-        form.setStockQuantity(item.getStockQuantity());
-        form.setAuthor(item.getAuthor());
-        form.setIsbn(item.getIsbn());
-        model.addAttribute("form", form);
-        return "items/updateItemForm";
-    }
-
-    /**
      * 상품 수정, 권장 코드
      */
     @PostMapping(value = "/items/{itemId}/edit")
