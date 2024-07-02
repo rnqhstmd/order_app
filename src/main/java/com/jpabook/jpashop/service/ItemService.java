@@ -14,27 +14,24 @@ import java.util.Optional;
 public class ItemService {
     private final ItemRepository itemRepository;
 
+    @Transactional
     public void saveItem(Item item) {
         itemRepository.save(item);
     }
 
-    public List<Item> findItems(Long id) {
+    public List<Item> findItems() {
         return itemRepository.findAll();
     }
 
-    public Optional<Item> findOne(Long itemId) {
-        return itemRepository.findById(itemId);
+    public Item findOne(Long itemId) {
+        return itemRepository.findOne(itemId);
     }
 
     @Transactional
     public void updateItem(Long id, String name, int price, int stockQuantity) {
-        Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("아아"));
+        Item item = itemRepository.findOne(id);
         item.setName(name);
         item.setPrice(price);
         item.setStockQuantity(stockQuantity);
-    }
-    public List<Item> findItems() {
-        return itemRepository.findAll();
     }
 }
